@@ -1,5 +1,19 @@
+@import "~bootstrap/scss/bootstrap-reboot";
+@import "~bootstrap/scss/bootstrap-grid";
+@import "~bootstrap/scss/forms";
+@import "~bootstrap/scss/buttons";
 .App {
   text-align: center;
+  iframe[id^="twitter-widget"] {
+    width: 100% !important;
+    height: 100vh !important;
+    max-width: 768px !important;
+    margin: 60px auto 0 !important;
+    left: 0;
+    right: 0;
+    top: 60px;
+    min-height: 100% !important;
+  }
 }
 
 .App-logo {
