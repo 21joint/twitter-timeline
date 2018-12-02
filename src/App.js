@@ -1,46 +1,45 @@
 import React, {Component} from 'react';
-import Header from "./components/Header"
-import {Timeline} from "react-twitter-widgets";
+import Timeline from "./Timeline";
 import './App.scss';
 
 class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            username: '',
-            screen_name: ''
-        }
+    state = {
+        screen_name: '',
+        tweets: []
     }
 
     onSubmit = (e) => {
         e.preventDefault();
         this.setState({
-            username: e.target.username.value,
             screen_name: e.target.screen_name.value
         });
     }
 
 
     render() {
-        const _timeline = (this.state.username && this.state.screen_name) ? <Timeline
-            dataSource={{
-                sourceType: 'profile',
-                screenName: this.state.screen_name
-            }}
-            options={{
-                username: this.state.username,
-                height: '100%',
-                width: '100%'
-            }}
-            onLoad={() => console.log('Timeline is loaded!')}
-        /> : "";
         return (
             <div className="App">
-                <Header
-                    username={this.state.username}
-                    screen_name={this.state.screen_name}
-                    onSubmit={this.onSubmit.bind(this)}/>
-                {_timeline}
+                <header className="app-header">
+                <div className="container-fluid">
+                    <div className="row">
+                        <div className="col-12">
+                            <form onSubmit={this.props.onSubmit}>
+                                <div className="form-row">
+                                    <div className="col">
+                                        <input type="text" className="form-control" name="screen_name"
+                                               placeholder="Screen Name"/>
+                                    </div>
+                                    <div className="col-auto">
+                                        <button className="btn btn-primary btn-block">Get Timeline</button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </header>
+                {this.state.tweets && <Timeline tweets={this.state.tweets}/>}
             </div>
         );
     }
